@@ -1,0 +1,15 @@
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\BhavyaModhiya_490_repository.dll.config
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\BhavyaModhiya_490_repository.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\BhavyaModhiya_490_repository.pdb
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\BhavyaModhiya_490_Model.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\EntityFramework.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\BhavyaModhiya_490_Model.pdb
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\BhavyaModhiya_490_Model.dll.config
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\EntityFramework.xml
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\obj\Debug\BhavyaModhiya_490_repository.csproj.AssemblyReference.cache
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\obj\Debug\BhavyaModhiya_490_repository.csproj.CoreCompileInputs.cache
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\obj\Debug\BhavyaModhiya_490_repository.csproj.CopyComplete
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\obj\Debug\BhavyaModhiya_490_repository.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_repository\obj\Debug\BhavyaModhiya_490_repository.pdb

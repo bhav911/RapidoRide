@@ -1,0 +1,81 @@
+﻿
+<style>
+    a.nav-link:hover {
+        color: orange !important;
+    }
+
+</style>
+
+<!-- Sidebar -->
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style=" background-color: #2d2b39; ">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/@TempData.Peek("Role")/Home">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Retro Rides</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    @{
+        if (TempData.Peek("Role") != null && TempData.Peek("Role").Equals("Admin"))
+        {
+            <li class="nav-item active">
+                <a class="nav-link" href="/Admin/Home">
+                    <i class="fa-solid fa-dice"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/Admin/AddBike">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Add Bike</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/Login/SignOut">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        }
+        else if (TempData.Peek("Role") != null && TempData.Peek("Role").Equals("User"))
+        {
+            <li class="nav-item active">
+                <a class="nav-link" href="/User/Home">
+                    <i class="fa-solid fa-dice"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/User/GetMyFavorites">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>My Favorites</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/User/GetProfile">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/Login/SignOut">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        }
+    }
+
+    <!-- Nav Item - Dashboard -->
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+
+
+</ul>
+<!-- End of Sidebar -->

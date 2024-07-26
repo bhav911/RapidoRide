@@ -1,0 +1,49 @@
+﻿@model BhavyaModhiya_490_Model.CustomModel.LoginModel
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "SignIn";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal mt-3">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group mb-3">
+            <label class="control-label">Role</label>
+            <select name="Role" class="form-control">
+                <option>Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mt-5 text-center">
+            <button class="btn btn-success">SignIn</button>
+        </div>
+    </div>
+}
+
+<div>
+    <span>Don't Have an Account ? </span>
+    @Html.ActionLink("SignUp", "SignUp", null, new { @class = "" })
+</div>
+
+<div>
+    Super Admin email is superadmin@gmail.com and password = 123456
+</div>

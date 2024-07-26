@@ -1,0 +1,250 @@
+﻿@model BhavyaModhiya_490_Model.CustomModel.UserModel
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "SignUp";
+}
+
+
+
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row mb-3">
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
+                
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                
+            </div>
+
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label" })
+                
+                    @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                
+            </div>
+
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })
+                
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group col-5">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-4">
+                @Html.LabelFor(model => model.PhoneNumber, "Phone Number", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-3">
+                @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", @type="date" } })
+                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.AddressLine1, "Address Line 1",htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.AddressLine2, "Address Line 2", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.AddressLine2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group col-4">
+                    <select id="country-holder" name="CountryID" class="form-control">
+                        <option value="-1">Select Country</option>
+                    </select>
+            </div>
+
+            <div class="form-group col-4">
+                    <select id="state-holder" name="StateID" class="form-control">
+                        <option value="-1">Select State</option>
+                    </select>
+            </div>
+
+            <div class="form-group col-4">
+                    <select id="city-holder" name="CityID" class="form-control">
+                        <option value="-1">Select City</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-end">
+            <div class="col-6 w-50">
+                <div class="input-group">
+                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Enter ZipCode" } })
+                    <button class="btn btn-outline-success" type="button" id="zip-btn">Verify</button>
+                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-6">
+                @Html.LabelFor(model => model.ProfilePictureFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                <input name="ProfilePictureFile" class="form-control" type="file" accept="image/png, image/jpg, image/jpeg" />
+                @Html.ValidationMessageFor(model => model.ProfilePictureFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group text-center mt-5">
+                <button class="btn btn-success">SignUp</button>
+        </div>
+    </div>
+</form>
+<div>
+    <span>Already Have an Account ? </span>
+    @Html.ActionLink("SignIn", "SignIn", null, new { @class=""})
+</div>
+
+
+<script>
+
+    let country = $("#country-holder")
+    let state = $("#state-holder")
+    let city = $("#city-holder")
+    let zipbtn = $('#zip-btn');
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Login/GetCountries",
+            type: "GET",
+            dataType: 'JSON',
+            success: function (res) {
+                $.each(res, (ind, ele) => {
+                    $(country).append(`
+                        <option value=${ele.CountryID}>${ele.Name}</option>
+                    `);
+                })
+            },
+            error: function (err) {
+
+            }
+        })
+    })
+
+    $(country).on('change', function () {
+        $.ajax({
+            url: "/Login/GetStates?CountryID=" + $(country).val(),
+            type: "GET",
+            dataType: 'JSON',
+            success: function (res) {
+                resetZip();
+                $(state).html(`<option value=-1>Select State</option>`)
+                $.each(res, (ind, ele) => {
+                    $(state).append(`
+                        <option value=${ele.StateID}>${ele.Name}</option>
+                    `);
+                })
+            },
+            error: function (err) {
+
+            }
+        })
+    })
+
+    $(state).on('change', function () {
+        $.ajax({
+            url: "/Login/GetCities?StateID=" + $(state).val(),
+            type: "GET",
+            dataType: 'JSON',
+            success: function (res) {
+                resetZip();
+                $.each(res, (ind, ele) => {
+                    $(city).append(`
+                        <option value=${ele.CityID} zip="${ele.ZipCode}">${ele.Name}</option>
+                    `);
+                })
+            },
+            error: function (err) {
+
+            }
+        })
+    })
+
+    $(city).on('change', function () {
+        let ind = city[0].selectedIndex
+        let option = city[0].options[ind];
+        let zip = $(option).attr('zip');
+        $('#ZipCode').val(zip);
+        $(zipbtn).addClass("btn-success").removeClass("btn-outline-success").text("Verified").prop('disabled', true);
+    })
+
+    function resetZip() {
+        $(city).html("<option value=-1>Select City</option>");
+        $('#ZipCode').val("");
+        $(zipbtn).addClass("btn-outline-success").removeClass("btn-success").text("Verify").prop('disabled', false);
+    }
+
+    $(zipbtn).on('click', function () {
+        let zip = $('#ZipCode').val();
+        if (zip != "") {
+            $.ajax({
+                url: "/Login/VerifyZip?zipCode=" + zip,
+                type: "GET",
+                dataType: "json",
+                success: function (res) {
+                    debugger
+                    if (res.Cid == null) {
+                        toastr.error("Invalid ZipCode");
+                    }
+                    else {
+                        $(city).html("");
+                        $(country).html("");
+                        $(state).html("");
+
+                        let countryl = res.CountryList;
+                        let statel = res.StateList;
+                        let cityl = res.CityList;
+                        let cid = res.Cid;
+                        let sid = res.Sid;
+                        let ccid = res.Ccid;
+
+                        $.each(countryl, (ind, ele) => {
+                            $(country).append(`
+                                <option ${ele.CountryID == cid ? "selected": ""} value=${ele.CountryID}>${ele.Name}</option>
+                            `);
+                        })
+
+                        $.each(statel, (ind, ele) => {
+                            $(state).append(`
+                                <option ${ele.StateID == sid ? "selected" : ""} value=${ele.StateID}>${ele.Name}</option>
+                            `);
+                        })
+
+                        $.each(cityl, (ind, ele) => {
+                            $(city).append(`
+                                <option ${ele.CityID == ccid ? "selected" : ""} value=${ele.CityID} zip="${ele.ZipCode}">${ele.Name}</option>
+                            `);
+                        })
+
+                        toastr.success("ZipCode verfied successfully");
+                        $(zipbtn).addClass("btn-success").removeClass("btn-outline-success").text("Verified").prop('disabled', true);
+
+                    }
+                },
+                error: function (err) {
+                    debugger
+                }
+            })
+        }
+    })
+</script>

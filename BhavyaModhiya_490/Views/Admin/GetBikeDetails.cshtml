@@ -1,0 +1,120 @@
+﻿@model BhavyaModhiya_490_Model.CustomModel.BikeModel
+
+@{
+    ViewBag.Title = "GetBikeDetails";
+}
+
+<h2>GetBikeDetails</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <div id="carousel-bike" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                <div class="carousel-inner d-flex align-items-center " style="width:100%; height:400px">
+                    @{
+                        string[] images = Model.Image.Split(',');
+                        bool first = true;
+                        foreach (var img in images)
+                        {
+                            <div class="carousel-item @(first ? "active" : "") text-center">
+                                <img src="~/Content/BikeImages/@img" class="d-block mx-auto w-25">
+                            </div>
+                            first = false;
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-bike" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-bike" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </dd>
+        <dt>
+            Seller
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Models)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Models)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Years)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Years)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KilometresDriven)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KilometresDriven)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+
+    </dl>
+</div>
+
+<p>
+    <button class="btn btn-secondary" onclick="history.back()">Back</button>
+
+    @Html.ActionLink("Edit", "EditBike", new { @bikeID = Model.BikeID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "DeleteBike", new { @bikeID = Model.BikeID }, new { @class = "btn btn-danger" })
+</p>

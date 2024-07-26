@@ -1,0 +1,75 @@
+﻿@model BhavyaModhiya_490_Model.CustomModel.BikeModel
+
+@{
+    ViewBag.Title = "GetBikeDetails";
+}
+
+
+<div class="d-flex justify-content-between">
+    <h2>@Model.Brand @Model.Models</h2>
+    <div class="me-5">
+        <i marker="@Model.BikeID" class="fav-btn w-100 @(Model.IsFavorite ? "fa-solid" : "fa-regular") fa-xl fa-heart" style="cursor:pointer"></i>
+    </div>
+</div>
+<div>
+    <hr />
+            <div id="carousel-bike" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                <div class="carousel-inner d-flex align-items-center " style="width:100%; height:400px">
+                    @{
+                        string[] images = Model.Image.Split(',');
+                        bool first = true;
+                        foreach (var img in images)
+                        {
+                            <div class="carousel-item @(first ? "active" : "") text-center">
+                                <img src="~/Content/BikeImages/@img" class="d-block mx-auto w-25">
+                            </div>
+                            first = false;
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-bike" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-bike" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+    <h4>Details</h4>
+    <hr />
+            <div>
+                <div class="row mb-5 fs-5 ms-5">
+                    <div class="col-4">
+                        <span>Seller:&nbsp;</span>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+                    </div>
+                    <div class="col-4">
+                        <span>Email:&nbsp;</span>@Html.DisplayNameFor(model => model.Email)
+                    </div>
+                    <div class="col-4">
+                        <span>Contact:&nbsp;</span> @Html.DisplayFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="row mb-5 fs-5 ms-5">
+                    <div class="col-4">
+                        <span>Years Of usage:&nbsp;</span>@Html.DisplayFor(model => model.Years)
+                    </div>
+                    <div class="col-4">
+                        <span>Kilometer Driven:&nbsp;</span>@Html.DisplayFor(model => model.KilometresDriven)
+                    </div>
+                    <div class="col-4">
+                        <span>Price:&nbsp;</span> @Html.DisplayFor(model => model.Price)
+                    </div>
+                </div>
+                <div class="row mb-5 fs-5 ms-5">
+                    <div colspan="3">
+                        <span>Description:&nbsp;</span> @Html.DisplayFor(model => model.Description)
+                    </div>
+                </div>
+            </div>
+</div>
+
+<div class="text-center mt-4">
+    <button class="btn btn-secondary" onclick="history.back()">Back</button>
+    @Html.ActionLink("Buy", "BuyBike", "User", new { @bikeID = Model.BikeID }, new { @class = "btn btn-success" })
+</div>

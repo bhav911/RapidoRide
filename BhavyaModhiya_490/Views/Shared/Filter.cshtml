@@ -1,0 +1,113 @@
+﻿
+
+<div>
+    <form id="filter-form">
+        <input hidden name="subcategoryID" value="@TempData.Peek("subcategoryID")"/>
+        <div class="modal fade text-start" id="filterModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Apply Filters</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <p class="text-primary-emphasis col-6">Brand</p>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input type="checkbox" value="Yamaha" name="brand" class="form-check-input" id="b1" />
+                                    <label class="form-check-label" for="b1">
+                                        Yamaha
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" value="Tvs" name="brand" class="form-check-input" id="b2" />
+                                    <label class="form-check-label" for="b2">
+                                        Tvs
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" value="Royal Enfield" name="brand" class="form-check-input" id="b6" />
+                                    <label class="form-check-label" for="b6">
+                                        Royal Enfield
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" value="Suzuki" name="brand" class="form-check-input" id="b3" />
+                                    <label class="form-check-label" for="b3">
+                                        Suzuki
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" value="Hero" name="brand" class="form-check-input" id="b4" />
+                                    <label class="form-check-label" for="b4">
+                                        Hero
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" value="Honda" name="brand" class="form-check-input" id="b5" />
+                                    <label class="form-check-label" for="b5">
+                                        Honda
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" value="*" name="brand" class="form-check-input" id="b7" checked  />
+                                    <label class="form-check-label" for="b7">
+                                        All
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <p class="text-primary-emphasis col-6 mb-0">Kms Driven</p>
+                            <div class="col-6">
+                                <div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Low</span>
+                                        <input type="number" class="form-control" step="500" value="3000" min="0" id="kmin">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">High</span>
+                                        <input type="number" class="form-control" step="500" value="8000" max="150000" id="kmax">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <p class="text-primary-emphasis col-6 mb-0">Years Of Usage</p>
+                            <div class="col-6">
+                                <div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Low</span>
+                                        <input type="number" class="form-control" step="2" value="1" min="0" id="ymin">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">High</span>
+                                        <input type="number" class="form-control" step="2" value="8" max="50" id="ymax">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="resetDate()" type="button">
+                            Reset to default
+                        </button>
+                        <button type="button" id="sbt-btn" class="btn btn-success" data-bs-dismiss="modal">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    
+
+   
+</script>

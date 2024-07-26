@@ -1,0 +1,231 @@
+﻿@model BhavyaModhiya_490_Model.CustomModel.ProfileModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .col-4 {
+        width: 33.3%
+    }
+</style>
+
+<div>
+    <h4>Profile</h4>
+    <hr />
+    <div class=" p-5">
+        <form method="post" enctype="multipart/form-data">
+            <div class="d-flex justify-content-center mb-5">
+                <div class="position-relative">
+                    <img class="rounded-circle border border-black img-fluid" style="height: 150px; width: 150px;" src="~/Content/UserProfile/@Model.ProfilePicture" />
+                    <label for="profilePic" class="btn-sm rounded-circle btn-primary position-absolute bottom-0" style="cursor: pointer; right: 8px"><i class="fa-solid fa-pen" style="color:white;"></i></label>
+                </div>
+                <input name="ProfilePictureFile" hidden type="file" accept="image/png, image/jpg, image/jpeg" id="profilePic" />
+            </div>
+            <h3 class="mb-4">Your Details:</h3>
+            <div class="row">
+                <input hidden type="text" name="UserID" value="@Model.UserID">
+                <div class="col-4 input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">First Name</span>
+                    <input type="text" class="form-control" name="FirstName" value="@Model.FirstName">
+                </div>
+                <div class="col-4 input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Middle Name</span>
+                    <input type="text" class="form-control" name="MiddleName" value="@Model.MiddleName">
+                </div>
+                <div class="col-4 input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Last Name</span>
+                    <input type="text" class="form-control" name="LastName" value="@Model.LastName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                    <input hidden readonly name="Email" value="@Model.Email">
+                    <p class="form-control bg-secondary-subtle" disabled>@Model.Email</p>
+                </div>
+                <div class="col-4 input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">BirthDate</span>
+                    @Html.TextBoxFor(m => m.BirthDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+                </div>
+                <div class="col-4 input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Phone Number</span>
+                    <input type="text" class="form-control" value="@Model.PhoneNumber" name="PhoneNumber" min="10" max="10">
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Address</span>
+                <input type="text" class="form-control" name="AddressLine1" value="@Model.Address">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Address Line 2</span>
+                <input type="text" class="form-control" name="AddressLine2" value="" placeholder="If Address field exceeds">
+            </div>
+            <div>
+                <div class="d-flex justify-content-between gap-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Country</span>
+                        <select id="country-holder" name="CountryID" class="form-control">
+                            @{
+                                foreach (var countryList in Model.geoModel.CountryList)
+                                {
+                                    <option value="@countryList.CountryID" @(countryList.CountryID == Model.geoModel.Cid ? "Selected" : "")>@countryList.Name </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">State</span>
+                        <select id="state-holder" name="StateID" class="form-control">
+                            @{
+                                foreach (var stateList in Model.geoModel.StateList)
+                                {
+                                    <option value="@stateList.StateID" @(stateList.StateID == Model.geoModel.Sid ? "Selected" : "")>@stateList.Name </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">City</span>
+                        <select id="city-holder" name="CityID" class="form-control">
+                            @{
+                                foreach (var cityList in Model.geoModel.CityList)
+                                {
+                                    <option zip="@cityList.ZipCode" value="@cityList.CityID" @(cityList.CityID == Model.geoModel.Ccid ? "Selected" : "")>@cityList.Name </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Enter ZipCode" } })
+                        <button class="btn btn-success" type="button" id="zip-btn">Verified</button>
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="text-center mt-5">
+                <button class="btn btn-success">Save</button>
+                <button class="btn btn-secondary" onclick="history.back()" type="button">Back</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let country = $("#country-holder")
+    let state = $("#state-holder")
+    let city = $("#city-holder")
+    let zipbtn = $('#zip-btn');
+
+    $(country).on('change', function () {
+        $.ajax({
+            url: "/Login/GetStates?CountryID=" + $(country).val(),
+            type: "GET",
+            dataType: 'JSON',
+            success: function (res) {
+                resetZip();
+                $(state).html(`<option value=-1>Select State</option>`)
+                $.each(res, (ind, ele) => {
+                    $(state).append(`
+                        <option value=${ele.StateID}>${ele.Name}</option>
+                    `);
+                })
+            },
+            error: function (err) {
+
+            }
+        })
+    })
+
+    $(state).on('change', function () {
+        $.ajax({
+            url: "/Login/GetCities?StateID=" + $(state).val(),
+            type: "GET",
+            dataType: 'JSON',
+            success: function (res) {
+                resetZip();
+                $.each(res, (ind, ele) => {
+                    $(city).append(`
+                        <option value=${ele.CityID} zip="${ele.ZipCode}">${ele.Name}</option>
+                    `);
+                })
+            },
+            error: function (err) {
+
+            }
+        })
+    })
+
+    $(city).on('change', function () {
+        let ind = city[0].selectedIndex
+        let option = city[0].options[ind];
+        let zip = $(option).attr('zip');
+        $('#ZipCode').val(zip);
+        $(zipbtn).addClass("btn-success").removeClass("btn-outline-success").text("Verified")
+    })
+
+    function resetZip() {
+        $(city).html("<option value=-1>Select City</option>");
+        $('#ZipCode').val("");
+        $(zipbtn).addClass("btn-outline-success").removeClass("btn-success").text("Verify");
+    }
+
+    $('#ZipCode').on('keydown', function () {
+        $(zipbtn).addClass("btn-outline-success").removeClass("btn-success").text("Verify");
+    })
+
+    $(zipbtn).on('click', function () {
+        debugger
+        let zip = $('#ZipCode').val();
+        if (zip != "") {
+            $.ajax({
+                url: "/Login/VerifyZip?zipCode=" + zip,
+                type: "GET",
+                dataType: "json",
+                success: function (res) {
+                    debugger
+                    if (res.Cid == 0) {
+                        toastr.error("Invalid ZipCode");
+                    }
+                    else {
+                        $(city).html("");
+                        $(country).html("");
+                        $(state).html("");
+
+                        let countryl = res.CountryList;
+                        let statel = res.StateList;
+                        let cityl = res.CityList;
+                        let cid = res.Cid;
+                        let sid = res.Sid;
+                        let ccid = res.Ccid;
+
+                        $.each(countryl, (ind, ele) => {
+                            $(country).append(`
+                                <option ${ele.CountryID == cid ? "selected" : ""} value=${ele.CountryID}>${ele.Name}</option>
+                            `);
+                        })
+
+                        $.each(statel, (ind, ele) => {
+                            $(state).append(`
+                                <option ${ele.StateID == sid ? "selected" : ""} value=${ele.StateID}>${ele.Name}</option>
+                            `);
+                        })
+
+                        $.each(cityl, (ind, ele) => {
+                            $(city).append(`
+                                <option ${ele.CityID == ccid ? "selected" : ""} value=${ele.CityID} zip="${ele.ZipCode}">${ele.Name}</option>
+                            `);
+                        })
+
+                        toastr.success("ZipCode verfied successfully");
+                        $(zipbtn).addClass("btn-success").removeClass("btn-outline-success").text("Verified");
+
+                    }
+                },
+                error: function (err) {
+                    debugger
+                }
+            })
+        }
+    })
+</script>

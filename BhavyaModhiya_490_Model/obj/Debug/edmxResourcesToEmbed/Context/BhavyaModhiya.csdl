@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BhavyaModhiya_490Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="State" Relationship="Self.fk_state_country" FromRole="Country" ToRole="State" />
+    <NavigationProperty Name="Users" Relationship="BhavyaModhiya_490Model.fk_country" FromRole="Country" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <NavigationProperty Name="Country" Relationship="Self.fk_state_country" FromRole="State" ToRole="Country" />
+    <NavigationProperty Name="Users" Relationship="BhavyaModhiya_490Model.fk_state" FromRole="State" ToRole="Users" />
+    <NavigationProperty Name="City" Relationship="BhavyaModhiya_490Model.fk_city_state" FromRole="State" ToRole="City" />
+  </EntityType>
+  <Association Name="fk_state_country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BhavyaModhiya_490Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Country" EntityType="Self.Country" />
+    <EntitySet Name="State" EntityType="Self.State" />
+    <AssociationSet Name="fk_state_country" Association="Self.fk_state_country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="State" EntitySet="State" />
+    </AssociationSet>
+    <EntitySet Name="Seller" EntityType="BhavyaModhiya_490Model.Seller" />
+    <EntitySet Name="Bike" EntityType="BhavyaModhiya_490Model.Bike" />
+    <AssociationSet Name="fk_bike_seller" Association="BhavyaModhiya_490Model.fk_bike_seller">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="Bike" EntitySet="Bike" />
+    </AssociationSet>
+    <EntitySet Name="FAVORITES" EntityType="BhavyaModhiya_490Model.FAVORITES" />
+    <EntitySet Name="Users" EntityType="BhavyaModhiya_490Model.Users" />
+    <AssociationSet Name="fk_country" Association="BhavyaModhiya_490Model.fk_country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="fk_favorite_bike" Association="BhavyaModhiya_490Model.fk_favorite_bike">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="FAVORITES" EntitySet="FAVORITES" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state" Association="BhavyaModhiya_490Model.fk_state">
+      <End Role="State" EntitySet="State" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="City" EntityType="BhavyaModhiya_490Model.City" />
+    <AssociationSet Name="fk_city" Association="BhavyaModhiya_490Model.fk_city">
+      <End Role="City" EntitySet="City" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="fk_city_state" Association="BhavyaModhiya_490Model.fk_city_state">
+      <End Role="State" EntitySet="State" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Seller">
+    <Key>
+      <PropertyRef Name="SellerID" />
+    </Key>
+    <Property Name="SellerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Bike" Relationship="BhavyaModhiya_490Model.fk_bike_seller" FromRole="Seller" ToRole="Bike" />
+  </EntityType>
+  <EntityType Name="Bike">
+    <Key>
+      <PropertyRef Name="BikeID" />
+    </Key>
+    <Property Name="BikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SellerID" Type="Int32" Nullable="false" />
+    <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Models" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Years" Type="Byte" Nullable="false" />
+    <Property Name="kilometresDriven" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Seller" Relationship="BhavyaModhiya_490Model.fk_bike_seller" FromRole="Bike" ToRole="Seller" />
+    <Property Name="isDeleted" Type="Boolean" />
+  </EntityType>
+  <Association Name="fk_bike_seller">
+    <End Type="BhavyaModhiya_490Model.Seller" Role="Seller" Multiplicity="1" />
+    <End Type="BhavyaModhiya_490Model.Bike" Role="Bike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="SellerID" />
+      </Principal>
+      <Dependent Role="Bike">
+        <PropertyRef Name="SellerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FAVORITES">
+    <Key>
+      <PropertyRef Name="FavID" />
+    </Key>
+    <Property Name="FavID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="BikeIDs" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="BhavyaModhiya_490Model.fk_favorite_bike" FromRole="FAVORITES" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="StateID" Type="Int32" Nullable="false" />
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Country" Relationship="BhavyaModhiya_490Model.fk_country" FromRole="Users" ToRole="Country" />
+    <NavigationProperty Name="FAVORITES" Relationship="BhavyaModhiya_490Model.fk_favorite_bike" FromRole="Users" ToRole="FAVORITES" />
+    <NavigationProperty Name="State" Relationship="BhavyaModhiya_490Model.fk_state" FromRole="Users" ToRole="State" />
+    <NavigationProperty Name="City" Relationship="BhavyaModhiya_490Model.fk_city" FromRole="Users" ToRole="City" />
+  </EntityType>
+  <Association Name="fk_country">
+    <End Type="BhavyaModhiya_490Model.Country" Role="Country" Multiplicity="1" />
+    <End Type="BhavyaModhiya_490Model.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_favorite_bike">
+    <End Type="BhavyaModhiya_490Model.Users" Role="Users" Multiplicity="1" />
+    <End Type="BhavyaModhiya_490Model.FAVORITES" Role="FAVORITES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="FAVORITES">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state">
+    <End Type="BhavyaModhiya_490Model.State" Role="State" Multiplicity="1" />
+    <End Type="BhavyaModhiya_490Model.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StateID" Type="Int32" />
+    <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="BhavyaModhiya_490Model.fk_city" FromRole="City" ToRole="Users" />
+    <NavigationProperty Name="State" Relationship="BhavyaModhiya_490Model.fk_city_state" FromRole="City" ToRole="State" />
+  </EntityType>
+  <Association Name="fk_city">
+    <End Type="BhavyaModhiya_490Model.City" Role="City" Multiplicity="1" />
+    <End Type="BhavyaModhiya_490Model.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_city_state">
+    <End Type="BhavyaModhiya_490Model.State" Role="State" Multiplicity="0..1" />
+    <End Type="BhavyaModhiya_490Model.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

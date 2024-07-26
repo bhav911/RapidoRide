@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="53008ecb3bda429eb809388436b88347" Name="Diagram1">
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.Country" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.State" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_state_country" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.Seller" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.Bike" Width="1.5" PointX="3" PointY="7" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_bike_seller" />
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.FAVORITES" Width="1.5" PointX="9.75" PointY="4" />
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.Users" Width="1.5" PointX="7.5" PointY="2.625" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_country" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_favorite_bike" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_state" />
+        <EntityTypeShape EntityType="BhavyaModhiya_490Model.City" Width="1.5" PointX="5.25" PointY="3.625" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_city" />
+        <AssociationConnector Association="BhavyaModhiya_490Model.fk_city_state" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

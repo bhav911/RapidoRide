@@ -1,0 +1,183 @@
+﻿
+<style>
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat, conic-gradient(#0000 30%,#ffa516);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: l13 1s infinite linear;
+}
+@@keyframes l13{
+  100%{transform: rotate(1turn)}
+}
+</style>
+
+
+<div class="position-absolute" style="right:50px; top:10px;">
+    <button class="btn fw-bold" style="background-color:orange; color:white;" data-bs-toggle="modal" data-bs-target="#filterModel">
+        Filters
+        <i class="fa-solid fa-filter" style="color:white"></i>
+    </button>
+    <a class="btn fw-bold" style="background-color:orange; color:white;" href="/User/Home" title="reset">
+        <i class="fa-solid fa-rotate-left" style="color:white"></i>
+    </a>
+</div>
+
+<div id="bike-holder">
+</div>
+<div class="d-flex justify-content-center">
+    <div style="width:50px" class="loader d-none" id="loader"></div>
+</div>
+
+<script>
+    let ymin = $('#ymin')
+    let ymax = $('#ymax')
+    let kmin = $('#kmin')
+    let kmax = $('#kmax')
+
+    let cards = 1;
+    var flag = true;
+    var formData = {
+        "yearsOfUsage": "*",
+        "kmDriven": "*",
+        "brand": "*",
+        "fetchPage": 1
+    };
+
+    var filterApplied = false;
+
+    $(ymax).on('change', verify);
+    $(ymin).on('change', verify);
+    $(kmin).on('change', verify);
+    $(kmax).on('change', verify);
+
+    function verify() {
+        let yminv = parseInt($(ymin).val());
+        let ymaxv = parseInt($(ymax).val());
+        let kminv = parseInt($(kmin).val());
+        let kmaxv = parseInt($(kmax).val());
+
+        if (yminv > ymaxv) {
+            toastr.error("Low of years should be smaller than high")
+        }
+
+        if (kminv > kmaxv) {
+            toastr.error("Low of Kilometers driven should be smaller than high")
+        }
+
+        if (yminv > ymaxv || kminv > kmaxv)
+            return false
+        return true;
+    }
+
+    function resetDate() {
+        $('#filter-form')[0].reset();
+    }
+    
+
+    $('#sbt-btn').on('click', function () {
+        var form = document.getElementById('filter-form');
+
+        let _flag = true;
+        for (var i = 0; i < form.elements.length; i++) {
+            var element = form.elements[i];
+            var name = element.name;
+            var value = element.value;
+
+            if (element.type === 'checkbox' && element.checked) {
+                if (_flag) {
+                    formData[name] = value;
+                    _flag = false;
+                }
+                else {
+                    formData[name] = formData[name] + "," + value;
+                }
+                if (value == "*") {
+                    formData[name] = "*";
+                    break;
+                }
+            }
+        }
+        formData["kmDriven"] = `${$(kmin).val()},${$(kmax).val()}`;
+        formData["yearsOfUsage"] = `${$(ymin).val()},${$(ymax).val()}`;
+        formData["fetchPage"] = 1;
+
+        if (verify()) {
+            $.ajax({
+                url: "/User/GetFilteredBikes",
+                type: "POST",
+                data: formData,
+                success: function (res) {
+                    filterApplied = true;
+                    flag = true;
+                    resetDate();
+                    $('#bike-holder').html(res)
+                    formData["fetchPage"]++;
+                },
+                error: function (err) {
+
+                }
+            })
+        }
+        else {
+            resetDate();
+        }
+
+    })
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/User/GetFilteredBikes",
+            type: "POST",
+            data: formData,
+            success: function (res) {
+                $('#bike-holder').html(res);
+                formData["fetchPage"]++;
+            },
+            error: function (err) {
+
+            }
+        })
+    })
+
+    window.addEventListener('scroll', function () {
+        
+        obj = formData
+        if (!flag) {
+            return;
+        }
+        $('#loader').removeClass('d-none');
+        var scrollPosition = window.scrollY + window.innerHeight;
+
+        var documentHeight = document.documentElement.scrollHeight;
+        
+        if (scrollPosition >= documentHeight) {
+            $.ajax({
+                url: "/User/GetFilteredBikes",
+                type: "POST",
+                data: formData,
+                success: function (res) {
+                    setTimeout(function () {
+                        $('#loader').addClass('d-none');
+                        $('#bike-holder').append(res)
+                        formData["fetchPage"]++;
+                        ele = $('#bike-holder').find('#stop-fetching')
+                        if ($(ele).length == 1) {
+                            flag = false;
+                            $('#loader').addClass('d-none');
+                        }
+                    }, 1000)
+                },
+                error: function (err) {
+
+                }
+            })
+
+
+        }
+    });
+</script>
+

@@ -1,0 +1,12 @@
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\BhavyaModhiya_490_Model.dll.config
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\BhavyaModhiya_490_Model.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\BhavyaModhiya_490_Model.pdb
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\EntityFramework.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\EntityFramework.xml
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\obj\Debug\BhavyaModhiya_490_Model.csproj.AssemblyReference.cache
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\obj\Debug\BhavyaModhiya_490_Model.csproj.CoreCompileInputs.cache
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\obj\Debug\BhavyaModhiya_490_Model.csproj.CopyComplete
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\obj\Debug\BhavyaModhiya_490_Model.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Model\obj\Debug\BhavyaModhiya_490_Model.pdb

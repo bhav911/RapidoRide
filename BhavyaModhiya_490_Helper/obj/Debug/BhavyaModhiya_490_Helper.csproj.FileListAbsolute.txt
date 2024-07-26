@@ -1,0 +1,12 @@
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\BhavyaModhiya_490_Helper.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\BhavyaModhiya_490_Helper.pdb
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\BhavyaModhiya_490_Model.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\EntityFramework.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\BhavyaModhiya_490_Model.pdb
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\BhavyaModhiya_490_Model.dll.config
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\bin\Debug\EntityFramework.xml
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\obj\Debug\BhavyaModhiya_490_Helper.csproj.AssemblyReference.cache
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\obj\Debug\BhavyaModhiya_490_Helper.csproj.CoreCompileInputs.cache
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\obj\Debug\BhavyaModhiya_490_Helper.csproj.CopyComplete
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\obj\Debug\BhavyaModhiya_490_Helper.dll
+C:\Users\sit410\Desktop\BhavyaModhiya_490\BhavyaModhiya_490\BhavyaModhiya_490_Helper\obj\Debug\BhavyaModhiya_490_Helper.pdb

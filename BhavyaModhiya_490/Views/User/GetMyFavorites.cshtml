@@ -1,0 +1,67 @@
+﻿@model List<BhavyaModhiya_490_Model.CustomModel.BikeModel>
+
+<div>
+    @{ if (Model.Count == 0)
+        {
+        <div class="d-flex flex-column align-items-center ">
+            <div>
+                <img class="" src="https://img.freepik.com/premium-vector/nothing-here-flat-illustration_418302-77.jpg" />
+            </div>
+            <h3 class="text-center text-secondary">Can't find a Bike</h3>
+            <div class="text-center">
+                @Html.ActionLink("Browse", "Home", null, new { @class = "btn btn-success mt-4" })
+            </div>
+        </div>
+        }
+    }
+
+    @foreach (var bike in Model)
+    {
+        <div class="card mb-4 border-black">
+            <h5 class="card-header bg-primary-subtle fw-bold text-primary">@bike.Brand @bike.Models </h5>
+            <div class="card-body row  position-relative">
+                <div class="col-5 text-center">
+                    <div id="carousel-bike" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                        <div class="carousel-inner d-flex align-items-center " style="width:100%; height:400px">
+                            @{
+                                string[] images = bike.Image.Split(',');
+                                bool first = true;
+                                foreach (var img in images)
+                                {
+                                    <div class="carousel-item @(first ? "active" : "") text-center">
+                                        <img src="~/Content/BikeImages/@img" class="d-block mx-auto w-75">
+                                    </div>
+                                    first = false;
+                                }
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-bike" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-bike" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-7">
+                    <div class="d-flex justify-content-between">
+                        <div class="border-start border-primary-subtle border-3 ps-4">
+                            <p class="text-secondary fs-4">Years of usage : @bike.Years</p>
+                            <p class="fs-3 text-success fw-bold">Price : @bike.Price</p>
+                        </div>
+                        <div>
+                            <i marker="@bike.BikeID" class="fav-btn w-100 fa-solid fa-xl fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="text-end bottom-0 position-absolute end-0 me-3">
+                        @Html.ActionLink("Details", "GetBikeDetails", "User", new { @bikeID = bike.BikeID }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Buy", "BuyBike", "User", new { @bikeID = bike.BikeID }, new { @class = "btn btn-success" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
